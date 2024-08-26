@@ -47,3 +47,23 @@ func TestToPtr(t *testing.T) {
 		t.Errorf("ToPtr() mismatch")
 	}
 }
+
+func TestMap(t *testing.T) {
+	if *Map(ToPtr("a"), func(s string) string { return s + "b" }) != "ab" {
+		t.Errorf("Map() mismatch")
+	}
+
+	if Map((*string)(nil), func(s string) string { return s + "b" }) != nil {
+		t.Errorf("Map() mismatch")
+	}
+}
+
+func TestFlatMap(t *testing.T) {
+	if *FlatMap(ToPtr("a"), func(s string) *string { return ToPtr(s + "b") }) != "ab" {
+		t.Errorf("FlatMap() mismatch")
+	}
+
+	if FlatMap((*string)(nil), func(s string) *string { return ToPtr(s + "b") }) != nil {
+		t.Errorf("FlatMap() mismatch")
+	}
+}
