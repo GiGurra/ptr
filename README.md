@@ -71,6 +71,47 @@ func main() {
 }
 ```
 
+### Map
+
+The 'Map' function applies a function to the value pointed to by `ptr` if it is not `nil`, otherwise it returns `nil`.
+
+```go
+
+package main
+
+import (
+	"fmt"
+	"github.com/GiGurra/ptr"
+)
+
+func main() {
+	var str *string
+	value := ptr.Map(str, func(s string) string { return s + " world" })
+	fmt.Println(value) // Output: <nil>
+}
+```
+
+### FlatMap
+
+The 'FlatMap' function applies a function to the value pointed to by `ptr` if it is not `nil`, otherwise it returns
+`nil`.
+
+```go
+
+package main
+
+import (
+	"fmt"
+	"github.com/GiGurra/ptr"
+)
+
+func main() {
+	var str *string
+	value := ptr.FlatMap(str, func(s string) *string { return ptr.ToPtr(s + " world") })
+	fmt.Println(*value) // Output: <nil>
+}
+```
+
 ## Testing
 
 To run the tests, use the `go test` command:
